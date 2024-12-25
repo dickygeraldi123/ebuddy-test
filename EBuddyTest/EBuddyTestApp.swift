@@ -74,10 +74,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct EBuddyTestApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var appEnvironment = AppEnvironment()
+    @StateObject var userSession = UserSession()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(appEnvironment)
+                .environmentObject(userSession)
         }
     }
 }
