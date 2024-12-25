@@ -43,15 +43,16 @@ class FirebaseManager: ObservableObject {
 
     func getDataByQuery(_ collectionName: String, filters: [FilterModel], sortFilter: [SortModel], completion: @escaping ([QueryDocumentSnapshot]?, Error?) -> Void) {
         let db = Firestore.firestore()
-        let userRef = db.collection(collectionName)
+        var userRef: Query = db.collection(collectionName)
 
         for filter in filters {
-            userRef.whereField(filter.filterName, isEqualTo: filter.filterValue ?? "")
+            userRef = userRef.whereField(filter.filterName, isEqualTo: filter.filterValue!)
         }
 
         for sort in sortFilter {
-            userRef.order(by: sort.sortBy, descending: sort.sortValue == .Desc)
+            userRef = userRef.order(by: sort.sortBy, descending: sort.sortValue == .Desc)
         }
+        
         userRef.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 completion(nil, err)

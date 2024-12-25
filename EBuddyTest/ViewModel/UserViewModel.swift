@@ -9,18 +9,22 @@
 import Combine
 import FirebaseFirestore
 
-class MyPlaylistViewModel: ObservableObject {
+class UserViewModel: ObservableObject {
     // MARK: - Properties
+    @Published var isLoading: Bool = true
+    @Published var isShowAlert: Bool = false
     @Published var arrayOfUsers: [UsersModel] = []
     @Published var sortFilter: [SortModel] = []
     @Published var filters: [FilterModel] = []
     @Published var sort: [(String, Bool)] = []
 
     func getAllUsersData() {
+        isLoading = true
         FirebaseManager.shared.getDataByCollection(collectionName: "USERS") { [weak self] data, err in
             if let weakSelf = self {
+                weakSelf.isLoading = false
                 if err != nil {
-                    // Show alert
+                    weakSelf.isShowAlert = true
                 } else {
                     if let data = data {
                         for document in data {
@@ -32,11 +36,18 @@ class MyPlaylistViewModel: ObservableObject {
         }
     }
 
-    func getUsersByQuery() async {
+    func getUsersByQuery() {
+        sortFilter.append(SortModel(sortBy: "lastActive", sortValue: .Desc))
+        sortFilter.append(SortModel(sortBy: "rating", sortValue: .Desc))
+        sortFilter.append(SortModel(sortBy: "pricePerHour", sortValue: .Asc))
+        filters.append(FilterModel(filterName: "ge", filterValue: 0))
+
+        isLoading = true
         FirebaseManager.shared.getDataByQuery("USERS", filters: filters, sortFilter: sortFilter) { [weak self] data, err in
             if let weakSelf = self {
+                weakSelf.isLoading = false
                 if err != nil {
-                    // Show alert
+                    weakSelf.isShowAlert = true
                 } else {
                     if let data = data {
                         for document in data {

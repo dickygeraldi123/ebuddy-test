@@ -25,7 +25,7 @@ struct UsersModel {
         model.uid = data["uid"] as? String
         model.email = data["email"] as? String
         model.phoneNumber = data["phoneNumber"] as? String
-        model.gender = GenderEnum(rawValue: data["gender"] as? Int ?? 0)
+        model.gender = GenderEnum(rawValue: data["ge"] as? Int ?? 0)
         model.isActive = data["isActive"] as? Bool
         model.photoProfileUrl = data["photoProfileUrl"] as? String
         model.rating = data["rating"] as? Double

@@ -9,15 +9,17 @@ import SwiftUI
 import Kingfisher
 
 struct UserViewCell: View {
+    var userData: UsersModel!
+
     var body: some View {
         VStack(spacing: 4) {
             HStack {
-                Text("Zynx")
+                Text(userData.email ?? "")
                     .font(AppFont.bold.with(size: 16))
                     .foregroundColor(Color("primary-text"))
                 Circle()
+                    .fill(Color(UIColor(hex: userData.isActive! ? "5CB85F" : "808080")))
                     .frame(width: 8, height: 8)
-                    .background(Circle().foregroundColor(Color(UIColor(hex: "5CB85F"))))
                 Spacer()
                 Image("ic-verified")
                     .resizable()
@@ -26,7 +28,7 @@ struct UserViewCell: View {
                     .frame(width: 20, height: 20)
             }
             .padding(.bottom, 12)
-            KFImage(URL(string: "https://pics.craiyon.com/2023-11-26/oMNPpACzTtO5OVERUZwh3Q.webp"))
+            KFImage(URL(string: userData.photoProfileUrl ?? ""))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 158, height: 180)
@@ -36,10 +38,10 @@ struct UserViewCell: View {
                 Image("ic-star")
                     .resizable()
                     .frame(width: 20, height: 20)
-                Text("4.9")
+                Text("\(String(format: "%.2f", userData.rating ?? 0))")
                     .font(AppFont.bold.with(size: 14))
                     .foregroundColor(Color("primary-text"))
-                Text("(61)")
+                Text("(\(userData.totalRating ?? 0))")
                     .font(AppFont.bold.with(size: 14))
                     .foregroundColor(Color("secondary-text"))
                 Spacer()
@@ -47,12 +49,9 @@ struct UserViewCell: View {
             HStack(spacing: 4) {
                 AdaptiveImage(imageName: "ic-mana")
                     .frame(width: 20, height: 20)
-                Text("110.00")
+                Text(userData.pricePerHour?.formattedRateString() ?? "")
                     .font(AppFont.bold.with(size: 14))
                     .foregroundColor(Color("primary-text"))
-                Text("/1Hr")
-                    .font(AppFont.bold.with(size: 14))
-                    .foregroundColor(Color("secondary-text"))
                 Spacer()
             }
         }

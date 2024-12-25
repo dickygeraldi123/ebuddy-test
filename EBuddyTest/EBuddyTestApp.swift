@@ -11,7 +11,7 @@ import BackgroundTasks
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
+        configureFirebase()
 
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "personal.EBuddy-Test.upload", using: nil) { task in
             self.handleUploadTask(task: task as! BGProcessingTask)
@@ -78,7 +78,7 @@ struct EBuddyTestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeUserView()
                 .environmentObject(appEnvironment)
                 .environmentObject(userSession)
         }
