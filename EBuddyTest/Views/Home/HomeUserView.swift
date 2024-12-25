@@ -52,8 +52,8 @@ struct HomeUserView: View {
             Button("OK", role: .cancel) { }
         }
         .onAppear() {
-            userViewModel.getAllUsersData()
-//            userViewModel.getUsersByQuery()
+//            userViewModel.getAllUsersData()
+            userViewModel.getUsersByQuery()
         }
         .navigationBarHidden(true)
     }

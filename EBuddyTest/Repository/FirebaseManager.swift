@@ -17,7 +17,7 @@ class FirebaseManager: ObservableObject {
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
 
-        ref = db.collection("USERS").addDocument(data: dataToSend) { err in
+        ref = db.collection(collectionName).addDocument(data: dataToSend) { err in
             if let err  = err {
                 print ("Error adding document: \(err)")
             } else {

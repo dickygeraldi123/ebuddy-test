@@ -13,8 +13,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configureFirebase()
 
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "personal.EBuddy-Test.upload", using: nil) { task in
-            self.handleUploadTask(task: task as! BGProcessingTask)
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "personal.EBuddy-Test.upload", using: nil) { [weak self] task in
+            self?.handleUploadTask(task: task as! BGProcessingTask)
         }
 
         BackgroundUploader.shared.restoreQueueState()

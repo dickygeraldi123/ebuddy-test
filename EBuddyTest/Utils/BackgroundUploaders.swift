@@ -31,16 +31,15 @@ class BackgroundUploader {
         let image = uploadQueue.removeFirst()
         uploadImage(image: image) { [weak self] success, url in
             if let weakSelf = self {
+                weakSelf.isUploading = false
                 if !success {
                     weakSelf.uploadQueue.append(image)
+                    weakSelf.saveQueueState()
+                    weakSelf.processQueue()
                 } else if let url = url {
                     let actions = weakSelf.onDoneUpload.removeFirst()
                     actions(url.absoluteString)
                 }
-
-                weakSelf.saveQueueState()
-                weakSelf.isUploading = false
-                weakSelf.processQueue()
             }
         }
     }
@@ -100,6 +99,7 @@ class BackgroundUploader {
         if let queueData = defaults.array(forKey: "uploadQueue") as? [Data] {
             uploadQueue = queueData.compactMap { UIImage(data: $0) }
             print("Upload queue restored with \(uploadQueue.count) items.")
+            processQueue()
         }
     }
 }
