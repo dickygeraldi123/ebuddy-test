@@ -17,9 +17,22 @@
 		6269FD0E2D1BDD5A0099749E /* EBuddyTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EBuddyTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		62344D2B2D1BF9A0006F05C6 /* Exceptions for "EBuddyTest" folder in "EBuddyTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6269FD0D2D1BDD5A0099749E /* EBuddyTest */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6269FD102D1BDD5A0099749E /* EBuddyTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				62344D2B2D1BF9A0006F05C6 /* Exceptions for "EBuddyTest" folder in "EBuddyTest" target */,
+			);
 			path = EBuddyTest;
 			sourceTree = "<group>";
 		};
@@ -343,6 +356,7 @@
 				DEVELOPMENT_TEAM = WT327T4Z79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EBuddyTest/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "EBuddy Test";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -378,6 +392,7 @@
 				DEVELOPMENT_TEAM = WT327T4Z79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EBuddyTest/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "EBuddy Test";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
